@@ -45,4 +45,24 @@ describe('Display Test', () => {
 
         expect(lockedDisplay).toHaveTextContent('Unlocked');
     })
+
+    it(`should use the 'red-led' class when 'locked' or 'closed' is true`, () =>{
+        const { getByTestId } = render(<Display locked={true} closed={true} />);
+
+        const closedDisplay = getByTestId('closed-display');
+        const lockedDisplay = getByTestId('locked-display');
+
+        expect(closedDisplay).toHaveClass('red-led');
+        expect(lockedDisplay).toHaveClass('red-led');
+    })
+
+    it(`should use the 'green-led' class when 'locked' or 'closed' is false`, () =>{
+        const { getByTestId } = render(<Display />);
+
+        const closedDisplay = getByTestId('closed-display');
+        const lockedDisplay = getByTestId('locked-display');
+
+        expect(closedDisplay).toHaveClass('green-led');
+        expect(lockedDisplay).toHaveClass('green-led');
+    })
 })
