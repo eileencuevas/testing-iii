@@ -14,6 +14,20 @@ describe('Controls Test', () => {
         getByTestId('lock-btn');
     });
 
+    it('changes button text when buttons are clicked', () => {
+        const { getByTestId, rerender } = render(<Controls />);
+        let closeBtn = getByTestId('close-btn');
+        let lockBtn = getByTestId('lock-btn');
+        expect(closeBtn).toHaveTextContent('Close Gate');
+        expect(lockBtn).toHaveTextContent('Lock Gate');
+
+        rerender(<Controls closed={true} locked={true}/>);
+        closeBtn = getByTestId('close-btn');
+        lockBtn = getByTestId('lock-btn');
+        expect(closeBtn).toHaveTextContent('Open Gate');
+        expect(lockBtn).toHaveTextContent('Unlock Gate'); 
+    });
+
     it('disables open/close button when gate is locked', () => {
         const { getByTestId } = render(<Controls locked={true} closed={true} />);
 
